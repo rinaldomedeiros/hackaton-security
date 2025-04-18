@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:16.2
+    shm_size: 1g
+    container_name: userservice_psql
+    restart: always
+    environment:
+      - POSTGRES_USER=userservice
+      - POSTGRES_PASSWORD=P0o9i8u7
+      - POSTGRES_DB=user_service
+    ports:
+      - '5433:5432'
+    volumes:
+      - dbdata_userservice:/var/lib/postgresql/data
+      - ./src/main/resources/db/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - userservice_net
+
+volumes:
+  dbdata_userservice:
+
+networks:
+  userservice_net:
+    driver: bridge
+#    external: true

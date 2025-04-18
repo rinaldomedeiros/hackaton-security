@@ -1,0 +1,28 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/user_service
+    username: userservice
+    password: P0o9i8u7
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    
+springdoc:
+    swagger-ui:
+        path: /swagger-ui/index.html
+        
+jwt:
+  secret: "z8kL7#pX$5vN@qR9!tB2mY4wG6jD1hF3eC5sJ7uK9xM0lO4iP8vQ2aZ5rT6yU"
+  expiration: 86400000
+  
+#auth:
+#  service:
+#    base-url: "http://authservice:8082" # Nome do serviço no Docker
+#    validate-token-path: "/api/auth/validate"
+#    roles-path: "/api/auth/roles"      
