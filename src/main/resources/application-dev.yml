@@ -1,0 +1,10 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/user_service
+    username: userservice
+    password: P0o9i8u7
+
+

@@ -1,0 +1,13 @@
+services:
+  myapp:
+    build: .
+    container_name: security
+    ports:
+      - "9090:8080"
+    networks:
+      - hackaton_net
+
+networks:
+  hackaton_net:
+    name: hackaton_net
+    external: true
