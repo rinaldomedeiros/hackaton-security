@@ -15,6 +15,8 @@ import br.com.fiap.soat8.grupo14.hackathon.authservice.presentation.dto.Authenti
 import br.com.fiap.soat8.grupo14.hackathon.authservice.presentation.dto.ValidationResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/autenticar")
@@ -31,14 +33,14 @@ public class AutenticacaoController {
 
     @PostMapping("/login")
     @Operation(summary = "Este endpoint é responsável por autenticar e gerar o token.")
-    public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequestDTO request) {
+    public ResponseEntity<?> authenticate(@RequestBody @Valid AuthenticationRequestDTO request) {
   	  AuthenticationResponseDTO response = authenticateUserUseCase.execute(request);
   	  return ResponseEntity.ok(response);
     }
     
     @GetMapping("/validar")
     @Operation(summary = "Este endpoint é responsável por validar o token.")
-    public ResponseEntity<?> validateToken(@RequestParam String token) {
+    public ResponseEntity<?> validateToken(@RequestParam @NotBlank String token) {
     	ValidationResponseDTO response = validarTokenUseCase.execute(token);
     	return ResponseEntity.ok(response);
     }
